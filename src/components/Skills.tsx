@@ -125,7 +125,7 @@ const Skills = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const renderCards = (items: typeof gameEngineeringStrengths, categoryPrefix: string) => (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 8, alignItems: "start", marginBottom: 32 }}>
+    <div style={{ columns: "260px", columnGap: 8, marginBottom: 32 }}>
       {items.map((item, index) => {
         const id = `${categoryPrefix}-${index}`;
         return (
@@ -133,7 +133,11 @@ const Skills = () => {
             key={id}
             className={`ase-card ase-card-clickable`}
             onClick={() => setExpandedId(expandedId === id ? null : id)}
-            style={expandedId === id ? { borderColor: "var(--color-ase-selected)" } : {}}
+            style={{
+              breakInside: "avoid",
+              marginBottom: 8,
+              ...(expandedId === id ? { borderColor: "var(--color-ase-selected)" } : {})
+            }}
           >
             <div
               className="ase-card-title"
