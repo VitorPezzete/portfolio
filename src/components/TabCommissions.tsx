@@ -45,20 +45,27 @@ const TabCommissions = () => {
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Hourly Consulting / Debugging</td>
-                <td style={{ padding: "8px 0" }}>$15 USD / hr</td>
+                <td style={{ padding: "8px 0" }}>$10 USD / hr</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Small Feature (e.g. single UI menu)</td>
-                <td style={{ padding: "8px 0" }}>$45+ USD</td>
+                <td style={{ padding: "8px 0" }}>$25+ USD</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Core System (e.g. full inventory)</td>
-                <td style={{ padding: "8px 0" }}>$200+ USD</td>
+                <td style={{ padding: "8px 0" }}>$100+ USD</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
+                <td style={{ padding: "8px 0" }}>Full Game / Custom Contract</td>
+                <td style={{ padding: "8px 0" }}>On Demand</td>
               </tr>
             </tbody>
           </table>
           
           <div style={{ marginTop: 24, textAlign: "center" }}>
+            <p style={{ fontSize: 11, color: "var(--color-ase-disabled)", marginBottom: 6 }}>
+              <strong>Flexible Contracts:</strong> Open to weekly/monthly salaries, % rev-share, upfront payments, and on-demand pricing.
+            </p>
             <p style={{ fontSize: 11, color: "var(--color-ase-disabled)", marginBottom: 12 }}>
               Payment accepted via DevEx equivalent (Robux), PayPal, or Crypto.
             </p>
