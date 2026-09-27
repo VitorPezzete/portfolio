@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const strengths = [
+const gameEngineeringStrengths = [
   {
     title: "Server-authoritative combat",
     icon: "⚔️",
@@ -63,17 +63,108 @@ const strengths = [
   },
 ];
 
+const webEngineeringStrengths = [
+  {
+    title: "PHP & Laravel Ecosystem",
+    icon: "🐘",
+    shortDesc: "Secure RESTful APIs, MVC architecture, and Composer...",
+    details: [
+      "Laravel MVC: Structured backend logic for scalable web applications.",
+      "Composer: Efficient package and dependency management.",
+      "Database & ORM: Safe and performant querying with Eloquent.",
+    ],
+  },
+  {
+    title: "Modern Frontend",
+    icon: "⚛️",
+    shortDesc: "Reactive interfaces using TypeScript, JS, HTML5 and Tailwind...",
+    details: [
+      "TypeScript & JS: Strict type checking and modern ES6+ features.",
+      "Tailwind CSS: Rapid prototyping with utility-first responsive styling.",
+      "Semantic HTML5: Accessible and SEO-friendly document structure.",
+    ],
+  }
+];
+
+const techArtStrengths = [
+  {
+    title: "3D Modeling & UV Mapping",
+    icon: "🧊",
+    shortDesc: "Low-poly Blender models tailored for high-performance...",
+    details: [
+      "Topology Optimization: Creating extremely efficient low-poly geometry.",
+      "Smooth vs Flat Shading: Custom normals and rendering setups.",
+      "UV Unwrapping: Precise texture mapping across large surface grids.",
+    ],
+  },
+  {
+    title: "Pixel Art & Textures",
+    icon: "🎨",
+    shortDesc: "Aseprite pixel-perfect UI and stylized smooth textures...",
+    details: [
+      "Aseprite Textures: Generating retro 1-bit or full color maps.",
+      "Smooth Large-Grid Textures: Scaling art without obvious pixelation.",
+      "UI/UX Design: Bridging the gap between code and interactive visual aesthetics.",
+    ],
+  }
+];
+
 const skillTags = [
   "Luau (--!strict)",
-  "roblox-ts / TypeScript",
+  "PHP & Laravel",
+  "TypeScript / JS",
+  "Tailwind CSS",
+  "HTML5 & CSS3",
   "Vide & Charm",
-  "Service/Controller DI",
   "Rojo + Wally",
-  "StyLua / Selene",
+  "Blender",
+  "Aseprite",
 ];
 
 const Skills = () => {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const renderCards = (items: typeof gameEngineeringStrengths, categoryPrefix: string) => (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 8, alignItems: "start", marginBottom: 32 }}>
+      {items.map((item, index) => {
+        const id = `${categoryPrefix}-${index}`;
+        return (
+          <div
+            key={id}
+            className={`ase-card ase-card-clickable`}
+            onClick={() => setExpandedId(expandedId === id ? null : id)}
+            style={expandedId === id ? { borderColor: "var(--color-ase-selected)" } : {}}
+          >
+            <div
+              className="ase-card-title"
+              style={
+                expandedId === id
+                  ? { background: "var(--color-ase-selected)" }
+                  : {}
+              }
+            >
+              <span>{item.icon}</span>
+              {item.title}
+            </div>
+            <div className="ase-card-body">
+              <p style={{ fontSize: 13, marginBottom: expandedId === id ? 12 : 0 }}>
+                {item.shortDesc}
+              </p>
+              {expandedId === id && (
+                <ul style={{ paddingLeft: 16, fontSize: 13, lineHeight: 1.5 }}>
+                  {item.details.map((detail, di) => (
+                    <li key={di} style={{ marginBottom: 6 }}>
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 
   return (
     <div className="ase-section" id="skills">
@@ -87,44 +178,14 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="ase-separator">// CORE ENGINEERING STRENGTHS</div>
+      <div className="ase-separator">// ROBLOX CORE ENGINEERING</div>
+      {renderCards(gameEngineeringStrengths, "game")}
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 8, alignItems: "start" }}>
-        {strengths.map((item, index) => (
-          <div
-            key={index}
-            className={`ase-card ase-card-clickable`}
-            onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
-            style={expandedIndex === index ? { borderColor: "var(--color-ase-selected)" } : {}}
-          >
-            <div
-              className="ase-card-title"
-              style={
-                expandedIndex === index
-                  ? { background: "var(--color-ase-selected)" }
-                  : {}
-              }
-            >
-              <span>{item.icon}</span>
-              {item.title}
-            </div>
-            <div className="ase-card-body">
-              <p style={{ fontSize: 13, marginBottom: expandedIndex === index ? 12 : 0 }}>
-                {item.shortDesc}
-              </p>
-              {expandedIndex === index && (
-                <ul style={{ paddingLeft: 16, fontSize: 13, lineHeight: 1.5 }}>
-                  {item.details.map((detail, di) => (
-                    <li key={di} style={{ marginBottom: 6 }}>
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+      <div className="ase-separator">// WEB FULL-STACK & BACKEND</div>
+      {renderCards(webEngineeringStrengths, "web")}
+
+      <div className="ase-separator">// TECHNICAL ART & MODELING</div>
+      {renderCards(techArtStrengths, "art")}
     </div>
   );
 };
