@@ -45,22 +45,22 @@ const TabCommissions = () => {
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Hourly Consulting / Debugging</td>
-                <td style={{ padding: "8px 0" }}>$45 USD / hr</td>
+                <td style={{ padding: "8px 0" }}>R$ 45 / hr</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Small Feature (e.g. single UI menu)</td>
-                <td style={{ padding: "8px 0" }}>$150+ USD</td>
+                <td style={{ padding: "8px 0" }}>R$ 150+</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Core System (e.g. full inventory)</td>
-                <td style={{ padding: "8px 0" }}>$500+ USD</td>
+                <td style={{ padding: "8px 0" }}>R$ 450+</td>
               </tr>
             </tbody>
           </table>
           
           <div style={{ marginTop: 24, textAlign: "center" }}>
             <p style={{ fontSize: 11, color: "var(--color-ase-disabled)", marginBottom: 12 }}>
-              Payment accepted via DevEx equivalent (Robux) or PayPal/Crypto.
+              Payment accepted via Pix, DevEx equivalent (Robux), or PayPal.
             </p>
             <a 
               href="https://discord.gg/h8TYQEay" 
