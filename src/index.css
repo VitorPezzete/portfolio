@@ -1,34 +1,723 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════
+   ASEPRITE THEME — Design Tokens
+   ═══════════════════════════════════════════ */
+
 @theme {
-  --color-background: #0a0a0a;
-  --color-surface: #121212;
-  --color-primary: #9333ea;
-  --color-secondary: #4c1d95;
-  --color-text: #f3f4f6;
-  --color-muted: #9ca3af;
-  --font-sans: 'Inter', sans-serif;
+  /* 1-BIT 4AM Theme Colors */
+  --color-dark: #32292f;
+  --color-light: #e1d3c1;
+
+  --color-ase-face: var(--color-dark);
+  --color-ase-face-hot: var(--color-light);
+  --color-ase-titlebar: var(--color-light);
+  --color-ase-editor: var(--color-dark);
+  --color-ase-workspace: var(--color-dark);
+  
+  --color-ase-selected: var(--color-light);
+  --color-ase-text: var(--color-light);
+  --color-ase-text-selected: var(--color-dark);
+  
+  --color-ase-link: var(--color-light);
+  --color-ase-tooltip: var(--color-dark);
+  --color-ase-check-hot: var(--color-light);
+  --color-ase-disabled: var(--color-light);
+  
+  --color-ase-border: var(--color-light);
+  --color-ase-border-dark: var(--color-light);
+  
+  --color-ase-highlight: var(--color-light);
+  --color-ase-shadow: var(--color-dark);
+  
+  --color-ase-canvas-light: var(--color-dark);
+  --color-ase-canvas-dark: var(--color-dark);
+  
+  --color-ase-tab-active: var(--color-light);
+  --color-ase-menuitem-hot: var(--color-light);
+  --color-ase-status: var(--color-dark);
+  --color-ase-separator: var(--color-light);
+
+  /* Fonts */
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-pixel-body: 'Silkscreen', monospace;
 }
+
+/* ═══════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════ */
 
 @layer base {
-  body {
-    background-color: var(--color-background);
-    color: var(--color-text);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
+  *, *::before, *::after {
+    border-radius: 0 !important;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
   }
-  
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-ase-face);
+    color: var(--color-ase-text);
+    font-family: var(--font-pixel-body);
+    font-size: 14px;
+    line-height: 1.6;
+    overflow: hidden;
+    height: 100vh;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+  }
+
   ::selection {
-    background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+    background-color: var(--color-ase-selected);
+    color: var(--color-ase-text-selected);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-pixel);
+    line-height: 1.4;
+  }
+
+  a {
+    color: var(--color-ase-link);
+    text-decoration: underline;
+  }
+
+  a:hover {
+    color: var(--color-ase-selected);
   }
 }
 
-@layer utilities {
-  .glass {
-    background-color: rgba(147, 51, 234, 0.05);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: inset 0 0 20px rgba(147, 51, 234, 0.15), 0 4px 30px rgba(0, 0, 0, 0.5);
+/* ═══════════════════════════════════════════
+   ASEPRITE LAYOUT
+   ═══════════════════════════════════════════ */
+
+@layer components {
+  /* Main Aseprite grid */
+  .ase-layout {
+    display: grid;
+    grid-template-areas:
+      "menubar menubar menubar"
+      "toolbar canvas palette"
+      "timeline timeline timeline"
+      "statusbar statusbar statusbar";
+    grid-template-columns: 52px 1fr 100px;
+    grid-template-rows: auto 1fr auto auto;
+    height: 100vh;
+    width: 100vw;
+    background: var(--color-ase-face);
+    overflow: hidden;
+  }
+
+  /* Inset border effect (Aseprite-style beveled edges) */
+  .ase-inset {
+    border: 2px solid;
+    border-color: var(--color-ase-shadow) var(--color-ase-highlight) var(--color-ase-highlight) var(--color-ase-shadow);
+  }
+
+  .ase-outset {
+    border: 2px solid;
+    border-color: var(--color-ase-highlight) var(--color-ase-shadow) var(--color-ase-shadow) var(--color-ase-highlight);
+  }
+
+  /* ─── Menu Bar ─── */
+  .ase-menubar {
+    grid-area: menubar;
+    display: flex;
+    align-items: center;
+    background: var(--color-ase-face);
+    border-bottom: 1px solid var(--color-ase-border);
+    padding: 0;
+    height: 24px;
+    font-family: var(--font-pixel-body);
+    font-size: 14px;
+    user-select: none;
+  }
+
+  .ase-menubar-item {
+    padding: 4px 12px;
+    cursor: pointer;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: var(--color-ase-text);
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  .ase-menubar-item:hover {
+    background: var(--color-ase-menuitem-hot);
+    color: var(--color-ase-text-selected);
+  }
+
+  .ase-menubar-item.active {
+    background: var(--color-ase-titlebar);
+    color: var(--color-ase-text-selected);
+  }
+
+  /* ─── Toolbar ─── */
+  .ase-toolbar {
+    grid-area: toolbar;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    padding: 4px 2px;
+    background: var(--color-ase-face);
+    border-right: 1px solid var(--color-ase-border);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .ase-toolbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ase-tool-btn {
+    width: 24px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: var(--color-ase-face);
+    border: 1px solid transparent;
+    padding: 0;
+    color: var(--color-ase-text);
+  }
+
+  .ase-tool-btn:hover {
+    border-color: var(--color-ase-highlight) var(--color-ase-shadow) var(--color-ase-shadow) var(--color-ase-highlight);
+    background: var(--color-ase-face-hot);
+    color: var(--color-ase-text-selected);
+  }
+
+  .ase-tool-btn.active {
+    border-color: var(--color-ase-shadow) var(--color-ase-highlight) var(--color-ase-highlight) var(--color-ase-shadow);
+    background: var(--color-ase-check-hot);
+    color: var(--color-ase-text-selected);
+  }
+
+  .ase-tool-icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+
+  /* Color pair (FG/BG) */
+  .ase-color-pair {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    margin-top: 4px;
+  }
+
+  .ase-color-fg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-ase-border-dark);
+    background: var(--color-dark);
+    z-index: 2;
+  }
+
+  .ase-color-bg {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-ase-border-dark);
+    background: var(--color-light);
+    z-index: 1;
+  }
+
+  /* ─── Tabs ─── */
+  .ase-tabs-container {
+    grid-area: canvas;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-ase-workspace);
+    overflow: hidden;
+  }
+
+  .ase-tabs {
+    display: flex;
+    background: var(--color-ase-face);
+    border-bottom: 2px solid var(--color-ase-border-dark);
+    padding: 4px 4px 0 4px;
+    gap: 4px;
+  }
+
+  .ase-tab {
+    padding: 4px 16px;
+    background: var(--color-ase-face);
+    color: var(--color-ase-text);
+    border: 2px solid var(--color-ase-border-dark);
+    border-bottom: none;
+    cursor: pointer;
+    font-family: var(--font-pixel-body);
+    font-size: 12px;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ase-tab:hover {
+    background: var(--color-ase-face-hot);
+    color: var(--color-ase-text-selected);
+  }
+
+  .ase-tab.active {
+    background: var(--color-ase-canvas-light);
+    color: var(--color-ase-text);
+    margin-bottom: -2px;
+    padding-bottom: 6px;
+  }
+
+  /* ─── Canvas ─── */
+  .ase-canvas {
+    flex: 1;
+    background-color: transparent;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ase-face) var(--color-ase-workspace);
+  }
+
+  .ase-canvas::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .ase-canvas::-webkit-scrollbar-track {
+    background: var(--color-ase-workspace);
+  }
+
+  .ase-canvas::-webkit-scrollbar-thumb {
+    background: var(--color-ase-face);
+    border: 1px solid var(--color-ase-border);
+  }
+
+  .ase-canvas-inner {
+    margin: 20px auto;
+    max-width: 900px;
+    min-height: 100%;
+    background-color: var(--color-ase-canvas-light);
+    background-image: repeating-conic-gradient(
+      var(--color-ase-canvas-dark) 0% 25%,
+      var(--color-ase-canvas-light) 0% 50%
+    );
+    background-size: 16px 16px;
+    border: 2px solid var(--color-ase-border-dark);
+    padding: 24px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ─── Color Palette ─── */
+  .ase-palette {
+    grid-area: palette;
+    background: var(--color-ase-face);
+    border-left: 1px solid var(--color-ase-border);
+    padding: 4px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .ase-palette::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ase-palette-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+  }
+
+  .ase-palette-swatch {
+    aspect-ratio: 1;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .ase-palette-swatch:hover {
+    border-color: var(--color-ase-text-selected);
+    z-index: 1;
+    outline: 1px solid var(--color-ase-text-selected);
+  }
+
+  .ase-palette-swatch.selected {
+    border-color: var(--color-ase-selected);
+    outline: 1px solid var(--color-ase-selected);
+    z-index: 2;
+  }
+
+  /* ─── Timeline ─── */
+  .ase-timeline {
+    grid-area: timeline;
+    background: var(--color-ase-face);
+    border-top: 1px solid var(--color-ase-border);
+    display: flex;
+    align-items: stretch;
+    height: 48px;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  .ase-timeline-layers {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--color-ase-border);
+    min-width: 100px;
+    font-size: 11px;
+    font-family: var(--font-pixel-body);
+  }
+
+  .ase-timeline-layer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    height: 24px;
+    border-bottom: 1px solid var(--color-ase-border);
+  }
+
+  .ase-timeline-layer-icon {
+    width: 12px;
+    height: 12px;
+    opacity: 0.7;
+  }
+
+  .ase-timeline-frames {
+    display: flex;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .ase-timeline-frames::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ase-timeline-col {
+    display: flex;
+    flex-direction: column;
+    min-width: 80px;
+    border-right: 1px solid var(--color-ase-border);
+  }
+
+  .ase-timeline-header {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-family: var(--font-pixel);
+    border-bottom: 1px solid var(--color-ase-border);
+    background: var(--color-ase-face);
+    cursor: pointer;
+    color: var(--color-ase-text);
+  }
+
+  .ase-timeline-header:hover {
+    background: var(--color-ase-check-hot);
+    color: var(--color-ase-text-selected);
+  }
+
+  .ase-timeline-header.active {
+    background: var(--color-ase-tab-active);
+    color: var(--color-ase-text-selected);
+  }
+
+  .ase-timeline-cell {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-ase-canvas-light);
+    border-bottom: 1px solid var(--color-ase-border);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .ase-timeline-cell:hover {
+    background: var(--color-ase-check-hot);
+  }
+
+  .ase-timeline-cell.active {
+    background: var(--color-ase-tab-active);
+  }
+
+  .ase-timeline-cell.active::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--color-ase-canvas-light);
+    border: 1px solid var(--color-ase-border);
+  }
+
+  /* ─── Status Bar ─── */
+  .ase-statusbar {
+    grid-area: statusbar;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: var(--color-ase-status);
+    color: #2e3234;
+    font-family: var(--font-pixel-body);
+    font-size: 12px;
+    padding: 2px 8px;
+    height: 22px;
+    border-top: 1px solid var(--color-ase-border);
+  }
+
+  .ase-statusbar-item {
+    padding: 0 8px;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+  }
+
+  .ase-statusbar-item:last-child {
+    border-right: none;
+    margin-left: auto;
+  }
+
+  /* ─── Pixel Button ─── */
+  .ase-btn {
+    font-family: var(--font-pixel-body);
+    font-size: 14px;
+    padding: 6px 16px;
+    background: var(--color-ase-face);
+    color: var(--color-ase-text);
+    border: 2px solid;
+    border-color: var(--color-ase-highlight) var(--color-ase-shadow) var(--color-ase-shadow) var(--color-ase-highlight);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+
+  .ase-btn:hover {
+    background: var(--color-ase-face-hot);
+    color: var(--color-ase-text-selected);
+  }
+
+  .ase-btn:active {
+    border-color: var(--color-ase-shadow) var(--color-ase-highlight) var(--color-ase-highlight) var(--color-ase-shadow);
+  }
+
+  .ase-btn-primary {
+    background: var(--color-ase-titlebar);
+    color: var(--color-ase-text-selected);
+  }
+
+  .ase-btn-primary:hover {
+    background: var(--color-ase-face-hot);
+    color: var(--color-ase-text-selected);
+  }
+
+  .ase-btn-danger {
+    background: var(--color-ase-selected);
+    color: var(--color-ase-text-selected);
+  }
+
+  /* ─── Pixel Card ─── */
+  .ase-card {
+    background: var(--color-ase-face);
+    border: 2px solid var(--color-ase-border-dark);
+    padding: 0;
+    margin-bottom: 16px;
+  }
+
+  .ase-card-title {
+    background: var(--color-ase-titlebar);
+    color: var(--color-ase-text-selected);
+    padding: 4px 8px;
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 2px solid var(--color-ase-border-dark);
+  }
+
+  .ase-card-body {
+    padding: 12px;
+    font-family: var(--font-pixel-body);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .ase-card-clickable {
+    cursor: pointer;
+  }
+
+  .ase-card-clickable:hover {
+    border-color: var(--color-ase-selected);
+  }
+
+  .ase-card-clickable:hover .ase-card-title {
+    background: var(--color-ase-selected);
+  }
+
+  /* ─── Aseprite Dialog/Modal ─── */
+  .ase-dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ase-dialog {
+    background: var(--color-ase-face);
+    border: 2px solid var(--color-ase-border-dark);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+  }
+
+  .ase-dialog-title {
+    background: var(--color-ase-titlebar);
+    color: var(--color-ase-text-selected);
+    padding: 4px 8px;
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--color-ase-border-dark);
+    user-select: none;
+  }
+
+  .ase-dialog-close {
+    width: 16px;
+    height: 14px;
+    background: var(--color-ase-face);
+    border: 1px solid var(--color-ase-border-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 10px;
+    font-family: var(--font-pixel-body);
+    color: var(--color-ase-text);
+    padding: 0;
+    line-height: 1;
+  }
+
+  .ase-dialog-close:hover {
+    background: var(--color-ase-selected);
+    color: var(--color-ase-text-selected);
+  }
+
+  .ase-dialog-body {
+    padding: 16px;
+    overflow-y: auto;
+    font-family: var(--font-pixel-body);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ─── Tags / Badges ─── */
+  .ase-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: var(--color-ase-canvas-light);
+    border: 1px solid var(--color-ase-border);
+    font-family: var(--font-pixel-body);
+    font-size: 12px;
+    color: var(--color-ase-text);
+  }
+
+  .ase-tag-primary {
+    background: var(--color-ase-titlebar);
+    color: var(--color-ase-text-selected);
+    border-color: var(--color-ase-border-dark);
+  }
+
+  /* ─── Tooltip ─── */
+  .ase-tooltip {
+    background: var(--color-ase-tooltip);
+    color: var(--color-ase-text);
+    padding: 4px 8px;
+    border: 1px solid var(--color-ase-border-dark);
+    font-family: var(--font-pixel-body);
+    font-size: 12px;
+    position: absolute;
+    z-index: 200;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ─── Separator ─── */
+  .ase-separator {
+    color: var(--color-ase-separator);
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    font-weight: bold;
+    margin: 20px 0 12px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--color-ase-border);
+  }
+
+  /* ─── Content section inside canvas ─── */
+  .ase-section {
+    margin-bottom: 32px;
+    scroll-margin-top: 16px;
+  }
+
+  .ase-section:last-child {
+    margin-bottom: 16px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .ase-layout {
+    grid-template-areas:
+      "menubar menubar"
+      "canvas canvas"
+      "timeline timeline"
+      "statusbar statusbar";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto auto;
+  }
+
+  .ase-toolbar,
+  .ase-palette {
+    display: none;
+  }
+
+  .ase-canvas-inner {
+    margin: 8px;
+    padding: 16px;
+  }
+
+  .ase-timeline-layers {
+    min-width: 60px;
+  }
+
+  .ase-timeline-col {
+    min-width: 60px;
   }
 }
