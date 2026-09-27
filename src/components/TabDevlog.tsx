@@ -73,26 +73,20 @@ const TabDevlog = () => {
       <div className="ase-card ase-card-clickable">
         <div className="ase-card-title">
           <span>🛡️</span>
-          glc_server_authoritative_combat.md
+          glc_extreme_network_optimization.md
           <span style={{ marginLeft: "auto", fontSize: 9, opacity: 0.8 }}>
             Sep 2026
           </span>
         </div>
         <div className="ase-card-body">
           <h3 style={{ fontFamily: "var(--font-pixel)", fontSize: 14, marginBottom: 8 }}>
-            Architecting Grand Line Chronicles
+            Network & Security: ByteBuffers + Rolling Keys
           </h3>
           <p style={{ marginBottom: 16 }}>
-            For <strong>Chronicles</strong>, I designed an enterprise-grade, server-authoritative Action RPG framework. 
-            The golden rule: <em>Never Trust the Client</em>. All critical logic—Targeting, I-Frames, Status Effects, and Hit Reactions—is processed purely on the server.
-            By utilizing spatial querying (Sphere/Boxcasts) paired with custom physics-based anti-cheat algorithms, proxy hits and exploiters are mathematically neutralized before they can impact gameplay.
+            In <strong>Grand Line Chronicles</strong>, standard <code>RemoteEvents</code> passing heavy JSON/dictionaries were causing severe bottlenecks for fast-paced combat. To solve this, I engineered a <strong>Network Service</strong> paired with a custom <strong>ByteBuffer</strong> to compress payloads down to raw bytes (UInt8, Int16).
           </p>
           <p style={{ marginBottom: 16 }}>
-            Under the hood, it's powered by strict typing (akin to Roblox-TS) and a rigorous <strong>Service/Controller</strong> pattern. To guarantee zero memory leaks in production, the framework heavily relies on the <strong>Trove</strong> pattern and Weak Tables for automated garbage collection.
-          </p>
-          <p style={{ marginBottom: 16 }}>
-            But the real bottleneck in massive Action RPGs is the network. I engineered a custom <strong>Network Service</strong> paired with client <strong>Controllers</strong> that strips away JSON/string overhead. 
-            By utilizing a custom <strong>ByteBuffer</strong>, remote events are packed into raw bytes. To ensure security against packet sniffers and replay attacks, every payload is validated using a <strong>Rolling Key Stone</strong> algorithm that desyncs exploiters immediately.
+            But compression wasn't enough; I needed ironclad security against Replay Attacks and Packet Spoofing. I built the <strong>RollingKeyStone</strong> module, utilizing a highly performant modified Linear Congruential Generator (LCG) algorithm. Every single packet is validated against a rolling seed. If an exploiter intercepts and resends a packet, the keys instantly desync and the server drops the request.
           </p>
 
           <pre style={{ 
@@ -104,20 +98,23 @@ const TabDevlog = () => {
             marginBottom: 16,
             color: "var(--color-ase-text)"
           }}>
-            <code>{`-- [NetworkService.luau]
-local buffer = ByteBuffer.new()
-buffer:WriteUInt8(PacketIDs.CombatHit)
-buffer:WriteVector3(hitPosition)
-buffer:WriteRollingKey(playerKeyStone)
-
--- Send raw encrypted bytes instead of heavy dictionaries
-RemoteEvent:FireClient(player, buffer:Export())`}</code>
+            <code>{`-- [RollingKeyStone.luau]
+function RollingKeyStone:CalculateNextKey(sequenceId: number, currentSeed: number): number
+    -- Modified Linear Congruential Generator (LCG)
+    local a = 1103515245
+    local c = 12345
+    local m = 2147483648 -- max u32 range
+    
+    -- Prevents floating point errors, guarantees exact UInt32
+    local newSeed = (a * currentSeed + sequenceId + c) % m
+    return math.floor(newSeed)
+end`}</code>
           </pre>
 
           <div style={{ display: "flex", gap: 4 }}>
-            <span className="ase-tag">#Security</span>
-            <span className="ase-tag">#Combat</span>
             <span className="ase-tag">#Networking</span>
+            <span className="ase-tag">#Security</span>
+            <span className="ase-tag">#Cryptography</span>
           </div>
         </div>
       </div>
