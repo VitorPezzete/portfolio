@@ -19,10 +19,10 @@ const TabCommissions = () => {
         </div>
         <div className="ase-card-body">
           <ul style={{ paddingLeft: 16, lineHeight: 1.8 }}>
-            <li><strong>Systems Engineering:</strong> Combat frameworks, inventory systems, magic/ability wrappers.</li>
+            <li><strong>Game Engineering:</strong> Combat frameworks, inventory systems, magic/ability wrappers.</li>
             <li><strong>UI/UX Implementation:</strong> Converting Figma designs into pixel-perfect, reactive Roact/Vide components.</li>
-            <li><strong>Codebase Refactoring:</strong> Migrating legacy spaghetti code into a strict typed, modular architecture (Rojo + Wally).</li>
-            <li><strong>Security Audits:</strong> Checking remote events for vulnerabilities and patching exploits.</li>
+            <li><strong>Full-Stack Web:</strong> Landing pages, portfolios, and backend RESTful APIs using Laravel/PHP and TypeScript/React.</li>
+            <li><strong>Technical Art:</strong> Low-poly 3D modeling in Blender and customized UI/Textures mapped via Aseprite.</li>
           </ul>
         </div>
       </div>
@@ -57,6 +57,18 @@ const TabCommissions = () => {
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Full Game / Custom Contract</td>
+                <td style={{ padding: "8px 0" }}>On Demand</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
+                <td style={{ padding: "8px 0" }}>Full-Stack Web App (Laravel/React)</td>
+                <td style={{ padding: "8px 0" }}>$150+ USD</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
+                <td style={{ padding: "8px 0" }}>Web Portfolios / Landing Pages</td>
+                <td style={{ padding: "8px 0" }}>$50+ USD</td>
+              </tr>
+              <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
+                <td style={{ padding: "8px 0" }}>Technical Art (Blender/Aseprite)</td>
                 <td style={{ padding: "8px 0" }}>On Demand</td>
               </tr>
             </tbody>

@@ -142,6 +142,60 @@ end`}</code>
           </div>
         </div>
       </div>
+
+      {/* Article 4 */}
+      <div className="ase-card ase-card-clickable">
+        <div className="ase-card-title">
+          <span>🐘</span>
+          laravel_scalable_api_architecture.md
+          <span style={{ marginLeft: "auto", fontSize: 9, opacity: 0.8 }}>
+            Sep 2026
+          </span>
+        </div>
+        <div className="ase-card-body">
+          <h3 style={{ fontFamily: "var(--font-pixel)", fontSize: 14, marginBottom: 8 }}>
+            Building Scalable APIs with Laravel
+          </h3>
+          <p style={{ marginBottom: 16 }}>
+            Transitioning from Roblox server-side logic to corporate Web Development feels natural when you understand architectural patterns. In this project, I used <strong>PHP 8</strong> and <strong>Laravel</strong> to build a robust RESTful API.
+          </p>
+          <p style={{ marginBottom: 16 }}>
+            Leveraging Laravel's MVC pattern, Eloquent ORM for database interactions, and Composer for dependency management, I created highly secure endpoints. The frontend seamlessly consumes this API using a <strong>React/TypeScript</strong> client styled with <strong>Tailwind CSS</strong>, resulting in a lightning-fast, reactive user experience.
+          </p>
+          <div style={{ display: "flex", gap: 4 }}>
+            <span className="ase-tag">#WebDev</span>
+            <span className="ase-tag">#Laravel</span>
+            <span className="ase-tag">#FullStack</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Article 5 */}
+      <div className="ase-card ase-card-clickable">
+        <div className="ase-card-title">
+          <span>🧊</span>
+          blender_aseprite_tech_art.md
+          <span style={{ marginLeft: "auto", fontSize: 9, opacity: 0.8 }}>
+            Oct 2026
+          </span>
+        </div>
+        <div className="ase-card-body">
+          <h3 style={{ fontFamily: "var(--font-pixel)", fontSize: 14, marginBottom: 8 }}>
+            From Aseprite to Blender: The Tech Art Pipeline
+          </h3>
+          <p style={{ marginBottom: 16 }}>
+            A solid game engineer also understands the asset pipeline. I developed a workflow combining <strong>Aseprite</strong> and <strong>Blender</strong> to create ultra-optimized 3D assets for large-scale grid environments.
+          </p>
+          <p style={{ marginBottom: 16 }}>
+            By modeling low-poly geometry in Blender with precise UV unwrapping, I can apply both retro pixel-perfect textures or smooth, flat-shaded maps painted in Aseprite. This ensures assets look incredibly stylized while maintaining minimal VRAM footprint and peak engine performance.
+          </p>
+          <div style={{ display: "flex", gap: 4 }}>
+            <span className="ase-tag">#TechArt</span>
+            <span className="ase-tag">#Blender</span>
+            <span className="ase-tag">#Aseprite</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

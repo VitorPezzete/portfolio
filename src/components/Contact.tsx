@@ -25,7 +25,7 @@ const Contact = () => {
           <p style={{ marginBottom: 20 }}>
             Add me on Discord:{" "}
             <strong style={{ color: "var(--color-ase-selected)" }}>
-              @szortks
+              @szortk
             </strong>
           </p>
 
