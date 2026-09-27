@@ -69,7 +69,36 @@ const TabDevlog = () => {
         </div>
       </div>
 
-      {/* Article 2 */}
+      {/* GLC Article */}
+      <div className="ase-card ase-card-clickable">
+        <div className="ase-card-title">
+          <span>🛡️</span>
+          glc_server_authoritative_combat.md
+          <span style={{ marginLeft: "auto", fontSize: 9, opacity: 0.8 }}>
+            Sep 2026
+          </span>
+        </div>
+        <div className="ase-card-body">
+          <h3 style={{ fontFamily: "var(--font-pixel)", fontSize: 14, marginBottom: 8 }}>
+            Architecting Grand Line Chronicles
+          </h3>
+          <p style={{ marginBottom: 16 }}>
+            For <strong>Chronicles</strong>, I designed an enterprise-grade, server-authoritative Action RPG framework. 
+            The golden rule: <em>Never Trust the Client</em>. All critical logic—Targeting, I-Frames, Status Effects, and Hit Reactions—is processed purely on the server.
+            By utilizing spatial querying (Sphere/Boxcasts) paired with custom physics-based anti-cheat algorithms, proxy hits and exploiters are mathematically neutralized before they can impact gameplay.
+          </p>
+          <p style={{ marginBottom: 16 }}>
+            Under the hood, it's powered by strict typing (akin to Roblox-TS) and a rigorous <strong>Service/Controller</strong> pattern. To guarantee zero memory leaks in production, the framework heavily relies on the <strong>Trove</strong> pattern and Weak Tables for automated garbage collection.
+          </p>
+          <div style={{ display: "flex", gap: 4 }}>
+            <span className="ase-tag">#Security</span>
+            <span className="ase-tag">#Combat</span>
+            <span className="ase-tag">#AntiCheat</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Article 3 */}
       <div className="ase-card ase-card-clickable">
         <div className="ase-card-title">
           <span>📄</span>
