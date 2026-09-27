@@ -90,10 +90,34 @@ const TabDevlog = () => {
           <p style={{ marginBottom: 16 }}>
             Under the hood, it's powered by strict typing (akin to Roblox-TS) and a rigorous <strong>Service/Controller</strong> pattern. To guarantee zero memory leaks in production, the framework heavily relies on the <strong>Trove</strong> pattern and Weak Tables for automated garbage collection.
           </p>
+          <p style={{ marginBottom: 16 }}>
+            But the real bottleneck in massive Action RPGs is the network. I engineered a custom <strong>Network Service</strong> paired with client <strong>Controllers</strong> that strips away JSON/string overhead. 
+            By utilizing a custom <strong>ByteBuffer</strong>, remote events are packed into raw bytes. To ensure security against packet sniffers and replay attacks, every payload is validated using a <strong>Rolling Key Stone</strong> algorithm that desyncs exploiters immediately.
+          </p>
+
+          <pre style={{ 
+            background: "var(--color-ase-workspace)", 
+            padding: 12, 
+            border: "1px solid var(--color-ase-border-dark)", 
+            fontSize: 10, 
+            overflowX: "auto",
+            marginBottom: 16,
+            color: "var(--color-ase-text)"
+          }}>
+            <code>{`-- [NetworkService.luau]
+local buffer = ByteBuffer.new()
+buffer:WriteUInt8(PacketIDs.CombatHit)
+buffer:WriteVector3(hitPosition)
+buffer:WriteRollingKey(playerKeyStone)
+
+-- Send raw encrypted bytes instead of heavy dictionaries
+RemoteEvent:FireClient(player, buffer:Export())`}</code>
+          </pre>
+
           <div style={{ display: "flex", gap: 4 }}>
             <span className="ase-tag">#Security</span>
             <span className="ase-tag">#Combat</span>
-            <span className="ase-tag">#AntiCheat</span>
+            <span className="ase-tag">#Networking</span>
           </div>
         </div>
       </div>
