@@ -45,15 +45,15 @@ const TabCommissions = () => {
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Hourly Consulting / Debugging</td>
-                <td style={{ padding: "8px 0" }}>$10 USD / hr</td>
+                <td style={{ padding: "8px 0" }}>$5 USD / hr</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Small Feature (e.g. single UI menu)</td>
-                <td style={{ padding: "8px 0" }}>$25+ USD</td>
+                <td style={{ padding: "8px 0" }}>$15+ USD</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Core System (e.g. full inventory)</td>
-                <td style={{ padding: "8px 0" }}>$100+ USD</td>
+                <td style={{ padding: "8px 0" }}>$30+ USD</td>
               </tr>
               <tr style={{ borderBottom: "1px solid var(--color-ase-border)" }}>
                 <td style={{ padding: "8px 0" }}>Full Game / Custom Contract</td>
