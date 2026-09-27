@@ -89,7 +89,7 @@ const Skills = () => {
 
       <div className="ase-separator">// CORE ENGINEERING STRENGTHS</div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 8 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 8, alignItems: "start" }}>
         {strengths.map((item, index) => (
           <div
             key={index}
