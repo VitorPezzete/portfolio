@@ -22,7 +22,7 @@ const Hero = () => {
             marginBottom: 16,
           }}
         >
-          Full-Stack Roblox Developer
+          Software Engineer & Technical Artist
         </p>
 
         {/* Availability badge */}
@@ -63,8 +63,8 @@ const Hero = () => {
           lineHeight: 1.6,
         }}
       >
-        11 years crafting server-authoritative combat, reactive UI, and robust
-        systems on Roblox.
+        11 years architecting massive multiplayer systems. Bridging the gap between 
+        Full-Stack Web (Laravel/React), Technical Art, and Game Engineering.
       </p>
 
       {/* Links */}

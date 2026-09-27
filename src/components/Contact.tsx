@@ -20,7 +20,7 @@ const Contact = () => {
           </h2>
           <p style={{ marginBottom: 16, maxWidth: 400, margin: "0 auto 16px" }}>
             Feel free to reach out — happy to talk about new projects,
-            opportunities, or just chat about Roblox development.
+            opportunities, or just chat about Software Engineering, Web Dev, and Tech Art.
           </p>
           <p style={{ marginBottom: 20 }}>
             Add me on Discord:{" "}
