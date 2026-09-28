@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useGame } from "./contexts/GameContext";
 import MenuBar from "./components/MenuBar";
 import type { Section } from "./components/MenuBar";
 import Toolbar from "./components/Toolbar";
@@ -34,10 +33,6 @@ function App() {
   const [zenMode, setZenMode] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [statusMessage, setStatusMessage] = useState("");
-  
-  const { addXp, unlockAchievement } = useGame();
-  const [visitedTabs, setVisitedTabs] = useState<Set<string>>(new Set(["portfolio.ase"]));
-  const [themeChanges, setThemeChanges] = useState(0);
   
   const canvasRef = useRef<HTMLDivElement>(null);
   
@@ -117,30 +112,22 @@ function App() {
     }
   };
 
+  // Tool handlers on Inner Content
   const handleContentClick = (e: React.MouseEvent) => {
     if (activeTool === "bucket") {
       setThemeIndex((prev) => (prev + 1) % THEMES.length);
       setStatusMessage(`Theme filled: ${THEMES[(themeIndex + 1) % THEMES.length].name}`);
-      addXp(15, e);
-      unlockAchievement("pixel_artist", e);
-      const newCount = themeChanges + 1;
-      setThemeChanges(newCount);
-      if (newCount >= 3) unlockAchievement("time_traveler", e);
     } else if (activeTool === "eraser") {
       setZenMode((prev) => !prev);
       setStatusMessage(zenMode ? "Zen Mode deactivated." : "Zen Mode activated.");
-      addXp(15, e);
-      unlockAchievement("zen_master", e);
     } else if (activeTool === "zoom") {
       e.preventDefault();
+      // Right click to zoom out is handled in contextMenu
       setZoomLevel((prev) => Math.min(prev + 0.25, 2));
       setStatusMessage(`Zoom: ${(Math.min(zoomLevel + 0.25, 2) * 100).toFixed(0)}%`);
-      addXp(5, e);
     } else if (activeTool === "eyedropper") {
       navigator.clipboard.writeText(window.location.href);
       setStatusMessage("Copied portfolio URL to clipboard!");
-      addXp(50, e);
-      unlockAchievement("link_sharer", e);
     }
   };
 
@@ -189,40 +176,21 @@ function App() {
           <div className="ase-tabs">
             <div 
               className={`ase-tab ${activeTab === "portfolio.ase" ? "active" : ""}`}
-              onClick={(e) => {
-                setActiveTab("portfolio.ase");
-                addXp(10, e);
-                const next = new Set(visitedTabs).add("portfolio.ase");
-                setVisitedTabs(next);
-                if (next.size >= 3) unlockAchievement("navigator", e);
-              }}
+              onClick={() => setActiveTab("portfolio.ase")}
             >
               <span style={{ fontSize: 10 }}>📄</span> portfolio.ase
             </div>
             <div 
               className={`ase-tab ${activeTab === "devlog.ase" ? "active" : ""}`}
-              onClick={(e) => {
-                setActiveTab("devlog.ase");
-                addXp(10, e);
-                const next = new Set(visitedTabs).add("devlog.ase");
-                setVisitedTabs(next);
-                if (next.size >= 3) unlockAchievement("navigator", e);
-              }}
+              onClick={() => setActiveTab("devlog.ase")}
             >
-              <span style={{ fontSize: 10 }}>📝</span> quest_log.ase
+              <span style={{ fontSize: 10 }}>📝</span> devlog.ase
             </div>
             <div 
               className={`ase-tab ${activeTab === "commissions.ase" ? "active" : ""}`}
-              onClick={(e) => {
-                setActiveTab("commissions.ase");
-                addXp(10, e);
-                unlockAchievement("window_shopper", e);
-                const next = new Set(visitedTabs).add("commissions.ase");
-                setVisitedTabs(next);
-                if (next.size >= 3) unlockAchievement("navigator", e);
-              }}
+              onClick={() => setActiveTab("commissions.ase")}
             >
-              <span style={{ fontSize: 10 }}>💼</span> merchant.ase
+              <span style={{ fontSize: 10 }}>💼</span> commissions.ase
             </div>
           </div>
         )}
