@@ -1,4 +1,28 @@
+import { useState, useRef } from "react";
+import { useGame } from "../contexts/GameContext";
+
+const TOTAL_ARTICLES = 5;
+
 const TabDevlog = () => {
+  const [expandedArticle, setExpandedArticle] = useState<number | null>(null);
+  const { addXp, unlockAchievement } = useGame();
+  const readArticles = useRef<Set<number>>(new Set());
+
+  const handleArticleClick = (articleIndex: number, e: React.MouseEvent) => {
+    const isOpening = expandedArticle !== articleIndex;
+    setExpandedArticle(isOpening ? articleIndex : null);
+    if (isOpening) {
+      addXp(15, e);
+      if (!readArticles.current.has(articleIndex)) {
+        readArticles.current.add(articleIndex);
+        unlockAchievement("first_blood", e);
+        if (readArticles.current.size >= TOTAL_ARTICLES) {
+          unlockAchievement("scholar", e);
+        }
+      }
+    }
+  };
+
   return (
     <div className="ase-section">
       <div className="ase-separator">// DEVLOG.TXT</div>
@@ -13,7 +37,7 @@ const TabDevlog = () => {
       </div>
 
       {/* Article 1 */}
-      <div className="ase-card ase-card-clickable">
+      <div className="ase-card ase-card-clickable" onClick={(e) => handleArticleClick(0, e)}>
         <div className="ase-card-title">
           <span>📄</span>
           llm_npcs_in_roblox.md
@@ -70,7 +94,7 @@ const TabDevlog = () => {
       </div>
 
       {/* GLC Article */}
-      <div className="ase-card ase-card-clickable">
+      <div className="ase-card ase-card-clickable" onClick={(e) => handleArticleClick(1, e)}>
         <div className="ase-card-title">
           <span>🛡️</span>
           glc_extreme_network_optimization.md
@@ -120,7 +144,7 @@ end`}</code>
       </div>
 
       {/* Article 3 */}
-      <div className="ase-card ase-card-clickable">
+      <div className="ase-card ase-card-clickable" onClick={(e) => handleArticleClick(2, e)}>
         <div className="ase-card-title">
           <span>📄</span>
           session_locking_101.md
@@ -144,7 +168,7 @@ end`}</code>
       </div>
 
       {/* Article 4 */}
-      <div className="ase-card ase-card-clickable">
+      <div className="ase-card ase-card-clickable" onClick={(e) => handleArticleClick(3, e)}>
         <div className="ase-card-title">
           <span>🐘</span>
           laravel_scalable_api_architecture.md
@@ -171,7 +195,7 @@ end`}</code>
       </div>
 
       {/* Article 5 */}
-      <div className="ase-card ase-card-clickable">
+      <div className="ase-card ase-card-clickable" onClick={(e) => handleArticleClick(4, e)}>
         <div className="ase-card-title">
           <span>🧊</span>
           blender_aseprite_tech_art.md

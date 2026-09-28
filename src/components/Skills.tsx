@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useGame } from "../contexts/GameContext";
 
 const gameEngineeringStrengths = [
   {
@@ -123,6 +124,8 @@ const skillTags = [
 
 const Skills = () => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const { addXp, unlockAchievement } = useGame();
+  const openedCards = useRef<Set<string>>(new Set());
 
   const renderCards = (items: typeof gameEngineeringStrengths, categoryPrefix: string) => (
     <div style={{ columns: "260px", columnGap: 8, marginBottom: 32 }}>
@@ -132,7 +135,17 @@ const Skills = () => {
           <div
             key={id}
             className={`ase-card ase-card-clickable`}
-            onClick={() => setExpandedId(expandedId === id ? null : id)}
+            onClick={(e) => {
+              const isOpening = expandedId !== id;
+              setExpandedId(isOpening ? id : null);
+              if (isOpening) {
+                addXp(10, e);
+                openedCards.current.add(id);
+                if (openedCards.current.size >= 3) {
+                  unlockAchievement("detective", e);
+                }
+              }
+            }}
             style={{
               breakInside: "avoid",
               marginBottom: 8,
