@@ -209,7 +209,7 @@ function App() {
                 if (next.size >= 3) unlockAchievement("navigator", e);
               }}
             >
-              <span style={{ fontSize: 10 }}>📝</span> devlog.ase
+              <span style={{ fontSize: 10 }}>📝</span> quest_log.ase
             </div>
             <div 
               className={`ase-tab ${activeTab === "commissions.ase" ? "active" : ""}`}
@@ -222,7 +222,7 @@ function App() {
                 if (next.size >= 3) unlockAchievement("navigator", e);
               }}
             >
-              <span style={{ fontSize: 10 }}>💼</span> commissions.ase
+              <span style={{ fontSize: 10 }}>💼</span> merchant.ase
             </div>
           </div>
         )}
