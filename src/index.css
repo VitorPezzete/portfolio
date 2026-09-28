@@ -721,3 +721,19 @@
     min-width: 60px;
   }
 }
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-50px); opacity: 0; }
+}
+
+.xp-float {
+  position: fixed;
+  pointer-events: none;
+  color: #fce205;
+  font-family: var(--font-pixel);
+  font-size: 20px;
+  text-shadow: 2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000;
+  z-index: 99999;
+  animation: floatUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
