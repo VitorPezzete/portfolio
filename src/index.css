@@ -686,6 +686,154 @@
   .ase-section:last-child {
     margin-bottom: 16px;
   }
+
+  /* ─── RPG Inventory ─── */
+  .inv-category-label {
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    color: var(--color-ase-text);
+    opacity: 0.5;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .inv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(64px, 64px));
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .inv-slot {
+    width: 64px;
+    height: 64px;
+    background: var(--color-ase-face);
+    border: 2px solid var(--color-ase-border-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+    user-select: none;
+  }
+
+  .inv-slot:hover {
+    transform: scale(1.08);
+    z-index: 10;
+  }
+
+  .inv-slot-selected {
+    z-index: 11;
+    transform: scale(1.08);
+  }
+
+  .inv-slot-empty {
+    opacity: 0.3;
+    cursor: default;
+    background: repeating-conic-gradient(
+      var(--color-ase-canvas-dark) 0% 25%,
+      var(--color-ase-canvas-light) 0% 50%
+    );
+    background-size: 8px 8px;
+  }
+
+  .inv-slot-empty:hover {
+    transform: none;
+  }
+
+  .inv-slot-icon {
+    font-size: 28px;
+    filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.5));
+  }
+
+  .inv-slot-rarity-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  /* ─── Inventory Tooltip ─── */
+  .inv-tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    background: #1a1a2e;
+    border: 2px solid #333;
+    padding: 10px;
+    z-index: 200;
+    pointer-events: none;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .inv-tooltip-header {
+    font-family: var(--font-pixel);
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+
+  .inv-tooltip-type {
+    font-family: var(--font-pixel-body);
+    font-size: 10px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+
+  .inv-tooltip-divider {
+    height: 1px;
+    background: #333;
+    margin: 6px 0;
+  }
+
+  .inv-tooltip-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .inv-tooltip-stat {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-pixel-body);
+    font-size: 11px;
+  }
+
+  .inv-tooltip-stat-label {
+    color: #888;
+  }
+
+  .inv-tooltip-stat-value {
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .inv-tooltip-passive {
+    font-family: var(--font-pixel-body);
+    font-size: 11px;
+    color: #ccc;
+    line-height: 1.4;
+  }
+
+  .inv-tooltip-lore {
+    font-family: var(--font-pixel-body);
+    font-size: 10px;
+    color: #fce205;
+    font-style: italic;
+    line-height: 1.3;
+    opacity: 0.8;
+  }
+
+  .inv-tooltip-rarity {
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    text-align: right;
+    margin-top: 4px;
+  }
 }
 
 /* ═══════════════════════════════════════════
