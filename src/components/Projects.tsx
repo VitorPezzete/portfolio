@@ -8,6 +8,7 @@ const projects = [
       "Rebuilt a live One Piece game with over 2.3 million visits from the ground up, as its solo programmer: more than 1,300 Luau modules replacing the old per-fruit scripts with one server-authoritative framework, with every player's data carried over.",
     tags: ["Luau", "Knit", "Fusion", "Rojo", "Wally"],
     link: "https://www.roblox.com/games/112233665771826/One-Piece-Divine",
+    githubLink: "https://github.com/VitorPezzete/OPD-Revamp",
     details: [
       "Authoritative Abilities: 48 devil fruits run through a single validated input path. The client sends only a slot, a press and an aim point; the server resolves ownership, level gates, cooldowns and charge time.",
       "Two Interfaces, One Codebase: A new UI and a faithful rebuild of the legacy one, switchable in settings, with gamepad support and touch controls players can move, resize and rebind.",
