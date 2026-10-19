@@ -21,6 +21,12 @@ const About = () => {
             to end, owning everything from an empty Rojo project to a live game
             with its own UI, combat, and persistence.
           </p>
+          <p style={{ marginTop: 12 }}>
+            I also compose music. I write the soundtracks for my own games in
+            Ableton Live, from the main themes to the little jingles, and you can
+            listen to some of it in the Haywood Valley project below, or turn on
+            the music in the status bar.
+          </p>
         </div>
       </div>
 

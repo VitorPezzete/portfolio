@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TRACKS, formatSeconds, trackSrc } from "../music";
 
 const projects = [
   {
@@ -68,6 +69,7 @@ const projects = [
       { src: "/projects/haywood/customize.jpg", alt: "The character customization screen" },
     ],
     imageCredit: "Interior tiles by Aeko; character pieces by the Haywood Valley contributors.",
+    tracks: TRACKS,
     details: [
       "2D World in a 3D Engine: Ground and objects are SurfaceGui sprites sorted by their distance to a fixed camera, with the zoom locked to whole multiples of the art pixel.",
       "Layered Characters: Each player is drawn from up to 19 tinted sprite layers. The look travels as a compact string that the server validates against the wardrobe catalog.",
@@ -185,6 +187,41 @@ const Projects = () => {
                         {project.imageCredit}
                       </p>
                     )}
+                  </div>
+                )}
+
+                {/* Soundtrack */}
+                {project.tracks && (
+                  <div style={{ marginBottom: 16 }} onClick={(e) => e.stopPropagation()}>
+                    <p style={{ fontSize: 13, marginBottom: 8 }}>
+                      <strong>Soundtrack:</strong> original music I composed for the game, played on
+                      orchestral woodwinds in Ableton Live. The main theme has one arrangement per time
+                      of day, so the game can crossfade between them as the hours pass.
+                    </p>
+                    {[...new Set(project.tracks.map((t) => t.group))].map((group) => (
+                      <div key={group} style={{ marginBottom: 10 }}>
+                        <div style={{ fontSize: 11, opacity: 0.7, marginBottom: 4 }}>{group}</div>
+                        {project.tracks!.filter((t) => t.group === group).map((track) => (
+                          <div
+                            key={track.id}
+                            style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "4px 10px", marginBottom: 6 }}
+                          >
+                            <span style={{ fontSize: 13, minWidth: 150, flex: "1 1 150px" }}>
+                              {track.title}{" "}
+                              <span style={{ opacity: 0.7, fontSize: 11 }}>
+                                {formatSeconds(track.seconds)} · {track.note}
+                              </span>
+                            </span>
+                            <audio
+                              controls
+                              preload="none"
+                              src={trackSrc(track)}
+                              style={{ flex: "1 1 220px", minWidth: 0, maxWidth: "100%", height: 32 }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ))}
                   </div>
                 )}
 

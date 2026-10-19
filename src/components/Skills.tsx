@@ -109,6 +109,29 @@ const techArtStrengths = [
   }
 ];
 
+const musicStrengths = [
+  {
+    title: "Game Music Composition",
+    icon: "🎼",
+    shortDesc: "Original soundtracks in Ableton Live, from themes to jingles...",
+    details: [
+      "Themes & Variations: One melody arranged per time of day or place, built to crossfade in-game.",
+      "Orchestral Woodwinds: Writing for flute, clarinet, oboe, bassoon and full sections.",
+      "Jingles & Stingers: Short cues for level ups, rewards, errors and quests.",
+    ],
+  },
+  {
+    title: "Interactive Game Audio",
+    icon: "🔊",
+    shortDesc: "Music and ambience that react to the game state...",
+    details: [
+      "Adaptive Music: Tracks that breathe in and out, follow the clock and fade through doors.",
+      "Ambience Layers: Zone and time-of-day soundscapes with muffling indoors.",
+      "Audio Budgets: Loudest-loops-only mixing and per-effect voice limits for mobile.",
+    ],
+  },
+];
+
 const skillTags = [
   "Luau (--!strict)",
   "PHP & Laravel",
@@ -119,6 +142,8 @@ const skillTags = [
   "Rojo + Wally",
   "Blender",
   "Aseprite",
+  "Ableton Live",
+  "Music Composition",
 ];
 
 const Skills = () => {
@@ -190,6 +215,9 @@ const Skills = () => {
 
       <div className="ase-separator">// TECHNICAL ART & MODELING</div>
       {renderCards(techArtStrengths, "art")}
+
+      <div className="ase-separator">// MUSIC & SOUND</div>
+      {renderCards(musicStrengths, "music")}
     </div>
   );
 };

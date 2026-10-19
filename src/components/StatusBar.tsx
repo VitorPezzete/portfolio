@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import BackgroundMusic from "./BackgroundMusic";
 
 interface StatusBarProps {
   customMessage?: string;
@@ -27,6 +28,7 @@ const StatusBar = ({ customMessage, zoom = 1 }: StatusBarProps) => {
       <span className="ase-statusbar-item" style={{ flex: 1, paddingLeft: 12 }}>
         {customMessage || "RGB"}
       </span>
+      <BackgroundMusic />
       <span className="ase-statusbar-item">
         szortks-portfolio.aseprite
       </span>
