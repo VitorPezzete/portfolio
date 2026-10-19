@@ -60,7 +60,14 @@ const projects = [
     description:
       "A top-down pixel-art farming game in development, written in roblox-ts. The world is a 2D scene assembled inside Roblox's 3D engine: sprites on camera-facing cards, a fixed three-quarter camera and whole-pixel scaling.",
     tags: ["roblox-ts", "Flamework", "Charm", "Vide"],
-    githubLink: "https://github.com/VitorPezzete/Haywood-Valley",
+    images: [
+      { src: "/projects/haywood/house-day.jpg", alt: "The player's house at noon" },
+      { src: "/projects/haywood/house-night.jpg", alt: "The same house at night, lit by the fireplace and a wall torch" },
+      { src: "/projects/haywood/island.jpg", alt: "A small island in the open sea" },
+      { src: "/projects/haywood/residents.jpg", alt: "Residents standing, sitting and sleeping" },
+      { src: "/projects/haywood/customize.jpg", alt: "The character customization screen" },
+    ],
+    imageCredit: "Interior tiles by Aeko; character pieces by the Haywood Valley contributors.",
     details: [
       "2D World in a 3D Engine: Ground and objects are SurfaceGui sprites sorted by their distance to a fixed camera, with the zoom locked to whole multiples of the art pixel.",
       "Layered Characters: Each player is drawn from up to 19 tinted sprite layers. The look travels as a compact string that the server validates against the wardrobe catalog.",
@@ -139,6 +146,47 @@ const Projects = () => {
                     </li>
                   ))}
                 </ul>
+
+                {/* Screenshots */}
+                {project.images && (
+                  <div style={{ marginBottom: 16 }}>
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+                        gap: 8,
+                      }}
+                    >
+                      {project.images.map((image) => (
+                        <a
+                          key={image.src}
+                          href={image.src}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            title={image.alt}
+                            loading="lazy"
+                            style={{
+                              width: "100%",
+                              display: "block",
+                              imageRendering: "pixelated",
+                              border: "1px solid var(--color-ase-selected)",
+                            }}
+                          />
+                        </a>
+                      ))}
+                    </div>
+                    {project.imageCredit && (
+                      <p style={{ fontSize: 11, opacity: 0.7, marginTop: 6 }}>
+                        {project.imageCredit}
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 {/* Action buttons */}
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
