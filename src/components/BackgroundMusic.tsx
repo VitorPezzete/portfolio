@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { BACKGROUND_PLAYLIST, trackSrc } from "../music";
+import { BACKGROUND_MUSIC_PLAY_EVENT, BACKGROUND_PLAYLIST, trackSrc } from "../music";
 
 const VOLUME = 0.35;
 
 /**
  * Background music toggle for the status bar. Browsers only allow sound after a click, so it starts
- * off and the button is that click. Any other audio on the page that starts playing pauses it.
+ * off and the button is that click. Any other audio on the page that starts playing pauses it, and
+ * starting it tells the Music section's player to pause (BACKGROUND_MUSIC_PLAY_EVENT).
  */
 const BackgroundMusic = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -42,6 +43,7 @@ const BackgroundMusic = () => {
     }
     const src = trackSrc(BACKGROUND_PLAYLIST[index]);
     if (!audio.src.endsWith(src)) audio.src = src;
+    document.dispatchEvent(new Event(BACKGROUND_MUSIC_PLAY_EVENT));
     audio.play().catch(() => setOn(false));
   }, [on, index]);
 

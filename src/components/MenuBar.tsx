@@ -25,7 +25,7 @@ const MenuBar = ({ sections, onNavigate }: MenuBarProps) => {
     ],
     Sprite: [
       ...sections
-        .filter((s) => s.id === "projects")
+        .filter((s) => s.id === "projects" || s.id === "music")
         .map((s) => ({ label: s.label, action: () => onNavigate(s.id) })),
     ],
     View: [

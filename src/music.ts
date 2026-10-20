@@ -28,4 +28,10 @@ export const BACKGROUND_PLAYLIST = ["theme-morning", "arpeggios-day", "theme-aft
   .map((id) => TRACKS.find((t) => t.id === id)!)
   .filter(Boolean);
 
-export const formatSeconds = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
+export const formatSeconds = (s: number) => {
+  const whole = Math.max(0, Math.round(s));
+  return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
+};
+
+/** Fired on document when the status-bar background music starts, so other players can pause. */
+export const BACKGROUND_MUSIC_PLAY_EVENT = "background-music-play";
